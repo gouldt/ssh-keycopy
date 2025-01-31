@@ -24,7 +24,7 @@
 # copy local user's key
 - name: Copy id_rsa.pub if found locally
   authorized_key:
-    user: remote_user_name
+    user: "{{ remoteUser }}"
     state: present
     key: "{{ lookup('file', ''{{ remoteUser_home.home }}/.ssh/id_rsa.pub') }}"
 
