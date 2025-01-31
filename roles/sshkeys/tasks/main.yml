@@ -1,35 +1,7 @@
 ---
 
-# figure out homedir location for your local key
-- name: Gathering user home directory location
-#  local_action: shell echo $HOME
-#  register: userhome
-#  ignore_errors: true
-
-  user:
-    name: "{{ remoteUser }}"
-    state: present
-  register: remoteUser_home
-
-- name: diosplay user home
-  debug:
-    var: remoteUser_home.home
-
-# copy any keys added to ../../files/authorized_keys
-- name: Copy keys added to authorized_keys
+# add any keys to ../../files/authorized_keys
+- name: add keys to authorized_keys
   authorized_key:
     user: "{{ remoteUser }}"
-    key: "{{ lookup('file', 'authorized_keys') }}"
-
-# copy local user's key
-#- name: Copy id_rsa.pub if found locally
-#  authorized_key:
-#    user: "{{ remoteUser }}"
-#    state: present
-#    key: "{{ lookup('file', '{{ remoteUser_home.home }}/.ssh/id_rsa.pub') }}"
-
-#  authorized_key:
-#    user="{{ remoteUser }}"
-#    key="{{ lookup('file', '{{ remoteUser_home.home }}/.ssh/id_rsa.pub') }}"
-#    manage_dir=yes
-#  ignore_errors: true
+    key: "{{ lookup('file', 'svc_ansible_pubkey') }}"
