@@ -16,17 +16,17 @@
     var: remoteUser_home.home
 
 # copy any keys added to ../../files/authorized_keys
-#- name: Copy keys added to authorized_keys
-#  authorized_key:
-#    user= "{{ remote_user }}"
-#    key= "{{ lookup('file', 'authorized_keys') }}"
+- name: Copy keys added to authorized_keys
+  authorized_key:
+    user= "{{ remote_user }}"
+    key= "{{ lookup('file', 'authorized_keys') }}"
 
 # copy local user's key
-- name: Copy id_rsa.pub if found locally
-  authorized_key:
-    user: "{{ remoteUser }}"
-    state: present
-    key: "{{ lookup('file', '{{ remoteUser_home.home }}/.ssh/id_rsa.pub') }}"
+#- name: Copy id_rsa.pub if found locally
+#  authorized_key:
+#    user: "{{ remoteUser }}"
+#    state: present
+#    key: "{{ lookup('file', '{{ remoteUser_home.home }}/.ssh/id_rsa.pub') }}"
 
 #  authorized_key:
 #    user="{{ remoteUser }}"
