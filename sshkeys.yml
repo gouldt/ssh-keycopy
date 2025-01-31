@@ -1,0 +1,10 @@
+---
+#
+# Ansible playbook to manage SSH keys
+#---
+- name: Get hostname
+  hosts: "{{ hosts_var }}"
+  gather_facts: true
+  remote_user: "{{ remote_user}}"
+  roles:
+    - role: sshkeys
