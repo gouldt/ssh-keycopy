@@ -3,6 +3,7 @@
 - name: Get hostname
   hosts: all
   gather_facts: no
+  become: false
   
   remote_user: "{{ remoteUser }}"
 
