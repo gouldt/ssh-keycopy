@@ -1,10 +1,16 @@
 ---
 
 # figure out homedir location for your local key
-- name: Gathering user home directory location
-  local_action: shell echo $HOME
-  register: userhome
-  ignore_errors: true
+#- name: Gathering user home directory location
+#  local_action: shell echo $HOME
+#  register: userhome
+#  ignore_errors: true
+
+- user:
+    name: "{{ remoteUser }}"
+    state: present
+  register: remoteUser
+
 
 # copy any keys added to ../../files/authorized_keys
 #- name: Copy keys added to authorized_keys
@@ -16,6 +22,6 @@
 - name: Copy id_rsa.pub if found locally
   authorized_key:
     user="{{ remoteUser }}"
-    key="{{ lookup('file', '{{ userhome.stdout }}/.ssh/id_rsa.pub') }}"
+    key="{{ lookup('file', '{{ remoteUser.home }}/.ssh/id_rsa.pub') }}"
     manage_dir=yes
   ignore_errors: true
