@@ -1,6 +1,11 @@
 ---
 
 # add any keys to ../../files/authorized_keys
+
+- name: print hosts_var
+  debug:
+    var: hosts_var
+
 - name: add keys to authorized_keys
   authorized_key:
     user: "{{ remoteUser }}"
