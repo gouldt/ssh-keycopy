@@ -4,4 +4,4 @@
 - name: add keys to authorized_keys
   authorized_key:
     user: "{{ remoteUser }}"
-    key: "{{ lookup('file', 'svc_ansible_pubkey') }}"
+    key: "{{ lookup('file', '{{ remoteUser }}_pubkey') }}"
