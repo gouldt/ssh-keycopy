@@ -5,3 +5,22 @@
   authorized_key:
     user: "{{ remoteUser }}"
     key: "{{ lookup('file', '{{ remoteUser }}_pubkey') }}"
+
+- name: Insert/Update "Match User" configuration block in /etc/ssh/sshd_config prepending and appending a new line
+  ansible.builtin.blockinfile:
+    path: /etc/ssh/sshd_config
+    append_newline: true
+    prepend_newline: true
+    block: 
+      Match User {{ remoteUser }}
+          AuthenticationMethods publickey
+          PasswordAuthentication no
+
+- name: restart service sshd
+  ansible.builtin.systemd_service:
+    name: sshd.service
+    state: restart
+
+ 
+
+ 
