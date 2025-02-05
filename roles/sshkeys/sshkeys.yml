@@ -1,5 +1,4 @@
 ---
-
 - name: Push ssh public key to hosts
   hosts: '{{ hosts_var }}'
   gather_facts: no

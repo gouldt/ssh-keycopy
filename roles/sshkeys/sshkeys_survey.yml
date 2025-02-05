@@ -1,0 +1,8 @@
+---
+- name: Push ssh public key to hosts by specific vm_name
+  hosts: '{{ vm_name }}'
+  gather_facts: no
+  become: false
+
+  roles:
+    - role: sshkeys
