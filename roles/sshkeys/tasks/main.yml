@@ -1,11 +1,6 @@
 ---
 
-# add any keys to ../../files/authorized_keys
-
-- name: print hosts_var
-  debug:
-    var: hosts_var
-
+# add supplied keys to remote user authorized_keys file and remove password login
 - name: add keys to authorized_keys
   authorized_key:
     user: "{{ remoteUser }}"
